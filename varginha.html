@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Varginha - Descubra a Cidade</title>
+  <style>
+    /* RESET BÁSICO */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    
+      body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, rgba(200, 255, 200, 0.3), #f4f7f8 90%);
+  color: #333;
+  line-height: 1.6;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  user-select: none;
+}
+
+    
+
+    /* ELEMENTOS DECORATIVOS - BOLHAS ET */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0.12;
+      filter: blur(20px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    body::before {
+      width: 200px;
+      height: 200px;
+      background: #4CAF50; /* verde */
+      top: 10%;
+      left: -50px;
+      animation: floatET 8s ease-in-out infinite;
+    }
+    body::after {
+      width: 150px;
+      height: 150px;
+      background: #81C784; /* verde claro */
+      bottom: 15%;
+      right: -40px;
+      animation: floatET 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatET {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-20px) translateX(10px);
+      }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3.8rem;
+      color: #2e7d32; /* verde mais forte */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    header p {
+      font-size: 1.4rem;
+      color: #4caf50;
+      font-weight: 600;
+      font-style: italic;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
+    }
+
+    /* SEÇÃO DE FOTOS DA CIDADE - espaço natural */
+    .city-photos {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .city-photos img {
+      width: 350px;
+      height: 220px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 6px 15px rgba(46,125,50,0.35);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      border: 3px solid #81c784;
+    }
+
+    .city-photos img:hover {
+      transform: scale(1.07) rotate(1deg);
+      box-shadow: 0 10px 25px rgba(46,125,50,0.6);
+    }
+
+    /* TEXTO DE INTRODUÇÃO */
+    .intro-text {
+      max-width: 800px;
+      margin: 0 auto 60px;
+      font-size: 1.25rem;
+      color: #2e7d32;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(46,125,50,0.2);
+      user-select: text;
+    }
+
+    /* TÍTULOS DE SEÇÃO */
+    .section-title {
+      font-size: 2.6rem;
+      color: #2e7d32;
+      font-weight: 700;
+      margin-bottom: 18px;
+      border-bottom: 3px solid #81c784;
+      display: inline-block;
+      padding-bottom: 6px;
+      user-select: text;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* CONTAINER DOS CÍRCULOS */
+    .circle-container {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .circle-item {
+      width: 180px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      color: #1b5e20;
+      font-weight: 600;
+      user-select: none;
+      text-decoration: none;
+      background: #e8f5e9;
+      border-radius: 20px;
+      padding: 10px 0;
+      box-shadow: 0 4px 10px rgba(46,125,50,0.15);
+    }
+
+    .circle-item:hover {
+      transform: scale(1.1);
+      color: #4caf50;
+      box-shadow: 0 8px 20px rgba(76,175,80,0.4);
+      background: #c8e6c9;
+    }
+
+    .circle-item img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #4caf50;
+      box-shadow: 0 5px 15px rgba(76,175,80,0.25);
+      margin-bottom: 14px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .circle-item:hover img {
+      box-shadow: 0 8px 25px rgba(76,175,80,0.6);
+    }
+
+    .circle-item span {
+      font-size: 1.3rem;
+      display: block;
+      user-select: text;
+    }
+
+    /* RODAPÉ */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      padding: 20px 0 10px;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 720px) {
+      .city-photos img, .circle-item, .circle-item img {
+        width: 140px;
+        height: 140px;
+      }
+      header h1 {
+        font-size: 2.4rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .intro-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bem-vindo a Varginha, MG</h1>
+    <p>Onde história, natureza e cultura se encontram em perfeita harmonia</p>
+  </header>
+
+  <section class="city-photos">
+    <img src="varginhapanoramica.jpg" alt="Foto panorâmica de Varginha" />
+    <img src="parquevarginha.jpg" alt="Natureza exuberante de Varginha" />
+    <img src="varginhacentro.webp" alt="Centro da cidade de Varginha" />
+  </section>
+
+  <section class="intro-text">
+    Varginha, situada no coração do Sul de Minas Gerais, encanta com seus mais de 140 mil habitantes e uma rica combinação de história, cultura e belezas naturais. Reconhecida como um polo regional dinâmico, destaca-se pela produção de café de alta qualidade, comércio vibrante e serviços que impulsionam o desenvolvimento local.<br><br>
+    Entre seus principais atrativos, está o famoso Memorial do ET, símbolo da famosa ocorrência ufológica que marca a cidade, além do Museu Municipal, Theatro Capitólio e o Museu do Café, que resgatam e celebram a identidade local. Varginha oferece ainda amplas áreas verdes, como o Zoológico e o Parque Centenário, perfeitos para momentos de lazer, caminhadas e contato com a natureza.<br><br>
+    Sua culinária, repleta de sabores típicos mineiros, pode ser apreciada nos variados bares, cafés e restaurantes, fazendo da cidade um destino acolhedor e cheio de encantos para turistas e visitantes.
+  </section>
+
+  <section>
+    <h2 class="section-title">Restaurantes</h2>
+    <div class="circle-container">
+      <a href="#" class="circle-item">
+        <img src="numero1.png" alt="Restaurante 1" />
+        <span>nome01</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero2.png" alt="Restaurante 2" />
+        <span>nome2</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero3.png" alt="Restaurante 3" />
+        <span>nome3</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Turismo</h2>
+    <div class="circle-container">
+      <a href="#" class="circle-item">
+        <img src="numero1.png" alt="Ponto turístico 1" />
+        <span>nome01</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero2.png" alt="Ponto turístico 2" />
+        <span>nome2</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero3.png" alt="Ponto turístico 3" />
+        <span>nome3</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Hospedarias</h2>
+    <div class="circle-container">
+      <a href="#" class="circle-item">
+        <img src="numero1.png" alt="Hospedaria 1" />
+        <span>nome01</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero2.png" alt="Hospedaria 2" />
+        <span>nome2</span>
+      </a>
+      <a href="#" class="circle-item">
+        <img src="numero3.png" alt="Hospedaria 3" />
+        <span>nome3</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; Direitos Reservados - IW
+  </footer>
+
+</body>
+</html>
